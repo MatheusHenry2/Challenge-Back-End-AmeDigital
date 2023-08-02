@@ -5,6 +5,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import planets.demo.Constants.Constants;
 import planets.demo.dtos.PlanetDto;
 import planets.demo.models.Planet;
 import planets.demo.models.PlanetResponse;
@@ -32,7 +33,7 @@ public class PlanetController {
         Optional<Planet> peopleModelOptional = planetService.findByid(id);
 
         if (!peopleModelOptional.isPresent()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new PlanetResponse("Planet not found"));
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new PlanetResponse(Constants.PLANET_NOT_FOUND));
         }
         return ResponseEntity.status(HttpStatus.CREATED).body(peopleModelOptional.get());
     }
@@ -42,7 +43,7 @@ public class PlanetController {
         Planet planet = planetService.findByName(name);
 
         if (planet == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new PlanetResponse("Planet with name " + name + "not found"));
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new PlanetResponse(Constants.PLANET_NOT_FOUND));
         }
         return ResponseEntity.status(HttpStatus.OK).body(planet);
     }
@@ -52,11 +53,11 @@ public class PlanetController {
         Optional<Planet> planetModelOptional = planetService.findByid(id);
 
         if (!planetModelOptional.isPresent()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new PlanetResponse("Planet not found for delete"));
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new PlanetResponse(Constants.PLANET_NOT_FOUND_FOR_DELETE));
         }
 
         planetService.delete(planetModelOptional.get());
-        return ResponseEntity.status(HttpStatus.OK).body(new PlanetResponse("Planet deleted successfully!"));
+        return ResponseEntity.status(HttpStatus.OK).body(new PlanetResponse(Constants.PLANET_DELETED));
     }
 
     @SneakyThrows
@@ -67,7 +68,7 @@ public class PlanetController {
 
         planetService.save(planetModel);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(new PlanetResponse("Planet created successfully!"));
+        return ResponseEntity.status(HttpStatus.CREATED).body(new PlanetResponse(Constants.PLANET_CREATED));
     }
 
     @GetMapping
