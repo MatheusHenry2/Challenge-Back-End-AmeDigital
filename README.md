@@ -17,9 +17,15 @@ Para cada planeta também devemos ter a quantidade de aparições em filmes, que
 Funcionalidades desejadas:
 
 Adicionar um planeta (com nome, clima e terreno)
+
 Listar planetas
+
 Buscar por nome
+
 Buscar por ID
+
 Remover planeta
+
 Linguagens que usamos: Kotlin, Scala, Java
+
 Bancos que usamos: PostgreSQL-11 with JSONB
