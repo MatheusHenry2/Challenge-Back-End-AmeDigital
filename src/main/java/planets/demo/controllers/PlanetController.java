@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import planets.demo.Constants.Constants;
+import planets.demo.api.StarWarsApi;
 import planets.demo.dtos.PlanetDto;
 import planets.demo.models.Planet;
 import planets.demo.models.PlanetResponse;
@@ -24,8 +25,11 @@ public class PlanetController {
 
     final PlanetService planetService;
 
+    final StarWarsApi starWarsApi;
+
     public PlanetController(PlanetService planetService) {
         this.planetService = planetService;
+        starWarsApi = new StarWarsApi();
     }
 
     @GetMapping("/id/{id}")
@@ -65,6 +69,8 @@ public class PlanetController {
     public ResponseEntity<PlanetResponse> savePlanet(@RequestBody @Valid PlanetDto planetDto) {
         var planetModel = new Planet();
         BeanUtils.copyProperties(planetDto, planetModel);
+
+        starWarsApi.getPlanetCountAppearances(planetDto.getName());
 
         planetService.save(planetModel);
 
