@@ -20,7 +20,7 @@ public class StarWarsApi {
             if (response.isSuccessful()) {
                 String responseBody = response.body().string();
                 Gson gson = new Gson();
-                JsonObject jsonObject = gson.fromJson(responseBody.toString(), JsonObject.class);
+                JsonObject jsonObject = gson.fromJson(responseBody, JsonObject.class);
                 int count = jsonObject.get("count").getAsInt();
                 System.out.println("Count: " + count);
             }
